@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: expense-tracker
+    runtime: node
+    rootDir: .
+    buildCommand: cd backend && npm install && cd ../web && npm install && npx ng build --configuration production
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: NODE_ENV
+        value: production
